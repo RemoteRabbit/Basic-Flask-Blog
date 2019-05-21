@@ -1,2 +1,2 @@
-# Flask-Blog-Tutorial
+# Basic-Flask-Blog
 Basic Flask blog from tutuorial
