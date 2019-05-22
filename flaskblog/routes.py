@@ -41,7 +41,8 @@ def register():
 
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        hashed_pw = bcrypt.generate_password_hash(
+                                            form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data,
                     password=hashed_pw)
 
@@ -65,7 +66,8 @@ def login():
                                                form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            return redirect(next_page) if next_page else redirect(
+                                                    url_for('home'))
         else:
             flash('Login failed, please check email and password.', 'danger')
     return render_template('login.html', title='Login', form=form)
@@ -83,7 +85,7 @@ def save_picture(form_picture):
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, 'static/profilePics',
                                 picture_fn)
-    output_size = (125,125)
+    output_size = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
